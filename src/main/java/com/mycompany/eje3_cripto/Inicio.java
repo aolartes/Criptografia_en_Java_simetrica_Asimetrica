@@ -14,7 +14,7 @@ public class Inicio {
         
         VistaUsers objetoVista = new VistaUsers();
         objetoVista.setVisible(true);
-        //hola
+        
         
     }
 }

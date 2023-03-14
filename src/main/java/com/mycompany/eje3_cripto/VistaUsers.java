@@ -16,6 +16,8 @@ public class VistaUsers extends javax.swing.JFrame {
     public VistaUsers() {
         initComponents();
         
+        txtcodigousuario.setEnabled(false);
+        
         //CConexion objetoConexion = new CConexion();
         //objetoConexion.establecerConexion();
         
@@ -37,7 +39,7 @@ public class VistaUsers extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtcodigoalumno = new javax.swing.JTextField();
+        txtcodigousuario = new javax.swing.JTextField();
         txtusuario = new javax.swing.JTextField();
         txtpassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -57,6 +59,12 @@ public class VistaUsers extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +73,11 @@ public class VistaUsers extends javax.swing.JFrame {
         });
 
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar");
 
@@ -83,7 +96,7 @@ public class VistaUsers extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtcodigoalumno, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcodigousuario, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtusuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                                 .addComponent(txtpassword, javax.swing.GroupLayout.Alignment.TRAILING))))
@@ -102,7 +115,7 @@ public class VistaUsers extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtcodigoalumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtcodigousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2))
                     .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,6 +145,11 @@ public class VistaUsers extends javax.swing.JFrame {
 
             }
         ));
+        tbListaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListaUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbListaUsuarios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -177,10 +195,25 @@ public class VistaUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        CUsers objetoUser = new CUsers();
-//        objetoUser.insertarUsuario(txtusuario, txtpassword);
-//        objetoUser.MostrarUsers(tbListaUsuarios);
+        CUsers objetoUser = new CUsers();
+        objetoUser.insertarUsuario(txtusuario, txtpassword);
+        objetoUser.MostrarUsers(tbListaUsuarios);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbListaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaUsuariosMouseClicked
+        CUsers objetoUser = new CUsers();
+        objetoUser.SeleccionarUser(tbListaUsuarios, txtcodigousuario, txtusuario, txtpassword);
+    }//GEN-LAST:event_tbListaUsuariosMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        CUsers objetoUser = new CUsers();
+        objetoUser.ModificarUsuario(txtcodigousuario,txtusuario, txtpassword);
+        objetoUser.MostrarUsers(tbListaUsuarios);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,7 +261,7 @@ public class VistaUsers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbListaUsuarios;
-    private javax.swing.JTextField txtcodigoalumno;
+    private javax.swing.JTextField txtcodigousuario;
     private javax.swing.JTextField txtpassword;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
