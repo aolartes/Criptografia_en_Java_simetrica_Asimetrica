@@ -16,6 +16,8 @@ public class VistaUsers extends javax.swing.JFrame {
     public VistaUsers() {
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         txtcodigousuario.setEnabled(false);
         
         //CConexion objetoConexion = new CConexion();
@@ -80,6 +82,11 @@ public class VistaUsers extends javax.swing.JFrame {
         });
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,6 +221,12 @@ public class VistaUsers extends javax.swing.JFrame {
     private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        CUsers objetoUser = new CUsers();
+        objetoUser.EliminarUsuario(txtcodigousuario);
+        objetoUser.MostrarUsers(tbListaUsuarios);        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

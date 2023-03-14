@@ -144,4 +144,22 @@ public class CUsers {
         
     }
     
+    public void EliminarUsuario(JTextField paramCodigo){
+        setCodigo(Integer.parseInt(paramCodigo.getText()));
+        
+        CConexion objetoConexion = new CConexion();
+        
+        String consulta = "DELETE FROM users WHERE id = ?;";
+        
+        try{
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+            cs.setInt(1, getCodigo());
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente.");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error: "+e);
+        }
+        
+    }
+    
 }
