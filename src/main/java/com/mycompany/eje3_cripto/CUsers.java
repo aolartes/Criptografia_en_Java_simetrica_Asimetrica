@@ -21,6 +21,15 @@ public class CUsers {
     String Users;
     String Password;
 
+    public String getPasswordHash() {
+        return PasswordHash;
+    }
+
+    public void setPasswordHash(String PasswordHash) {
+        this.PasswordHash = PasswordHash;
+    }
+    String PasswordHash;
+
     public int getCodigo() {
         return codigo;
     }
@@ -55,12 +64,13 @@ public class CUsers {
         modelo.addColumn("id");
         modelo.addColumn("users");
         modelo.addColumn("Password");
+        modelo.addColumn("password_hash");
         
         paramTablaTotalAlumnos.setModel(modelo);
         
         sql = "SELECT * FROM  users order by id;";
         
-        String [] datos = new String[3];
+        String [] datos = new String[4];
         Statement st;
         
         try{
@@ -72,6 +82,7 @@ public class CUsers {
                 datos[0]=rs.getString(1);
                 datos[1]=rs.getString(2);
                 datos[2]=rs.getString(3);
+                datos[3]=rs.getString(4);
                 
                 modelo.addRow(datos);
                 
@@ -89,7 +100,7 @@ public class CUsers {
         
         CConexion objetoConexion = new CConexion();
         
-        String consulta = "insert into users (usuario,contrasenia) values(?,?)";
+        String consulta = "insert into users (usuario,password) values(?,?)";
         
         try{
             CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
@@ -129,7 +140,7 @@ public class CUsers {
         
         CConexion objetoConexion = new CConexion();
         
-        String consulta = "UPDATE users SET usuario = ?, contrasenia = ? where users.id = ?";
+        String consulta = "UPDATE users SET usuario = ?, password = ? where users.id = ?";
         
         try{
             CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
@@ -145,6 +156,24 @@ public class CUsers {
     }
     
     public void EliminarUsuario(JTextField paramCodigo){
+        setCodigo(Integer.parseInt(paramCodigo.getText()));
+        
+        CConexion objetoConexion = new CConexion();
+        
+        String consulta = "DELETE FROM users WHERE id = ?;";
+        
+        try{
+            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+            cs.setInt(1, getCodigo());
+            cs.execute();
+            JOptionPane.showMessageDialog(null, "Se eliminó correctamente.");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error: "+e);
+        }
+        
+    }
+    
+    public void EncriptarContraseña(JTextField paramCodigo){
         setCodigo(Integer.parseInt(paramCodigo.getText()));
         
         CConexion objetoConexion = new CConexion();
