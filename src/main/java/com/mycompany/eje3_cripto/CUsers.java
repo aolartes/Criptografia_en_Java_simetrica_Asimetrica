@@ -136,42 +136,57 @@ public class CUsers {
     }
 
     public void ModificarUsuario(JTextField paramCodigo,JTextField paramUsers, JTextField paramPassword){
-        setCodigo(Integer.parseInt(paramCodigo.getText()));
-        setUsers(paramUsers.getText());
-        setPassword(paramPassword.getText());
-        
-        CConexion objetoConexion = new CConexion();
-        
-        String consulta = "UPDATE users SET usuario = ?, password = ? where users.id = ?";
-        
+                
         try{
-            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
-            cs.setString(1, getUsers());
-            cs.setString(2, getPassword());
-            cs.setInt(3, getCodigo());
-            cs.execute();
-            JOptionPane.showMessageDialog(null, "Se modifico correctamente.");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error: "+e);
-        }
+            setCodigo(Integer.parseInt(paramCodigo.getText()));
+            setUsers(paramUsers.getText());
+            setPassword(paramPassword.getText());
+
+            CConexion objetoConexion = new CConexion();
+
+            String consulta = "UPDATE users SET usuario = ?, password = ? where users.id = ?";
+
+            try{
+                CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+                cs.setString(1, getUsers());
+                cs.setString(2, getPassword());
+                cs.setInt(3, getCodigo());
+                cs.execute();
+                JOptionPane.showMessageDialog(null, "Se modifico correctamente.");
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e);
+            }
+
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Seleccione un registro para poder modificar el usuario");        
+                }
+        
+        
         
     }
     
     public void EliminarUsuario(JTextField paramCodigo){
-        setCodigo(Integer.parseInt(paramCodigo.getText()));
-        
-        CConexion objetoConexion = new CConexion();
-        
-        String consulta = "DELETE FROM users WHERE id = ?;";
-        
         try{
-            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
-            cs.setInt(1, getCodigo());
-            cs.execute();
-            JOptionPane.showMessageDialog(null, "Se eliminó correctamente.");
+            setCodigo(Integer.parseInt(paramCodigo.getText()));
+        
+            CConexion objetoConexion = new CConexion();
+
+            String consulta = "DELETE FROM users WHERE id = ?;";
+
+            try{
+                CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
+                cs.setInt(1, getCodigo());
+                cs.execute();
+                JOptionPane.showMessageDialog(null, "Se eliminó correctamente.");
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error: "+e);
+            }
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error: "+e);
+            JOptionPane.showMessageDialog(null, "Seleccione un registro para poder eliminar el usuario");        
+                        
         }
+        
+        
         
     }
 }
