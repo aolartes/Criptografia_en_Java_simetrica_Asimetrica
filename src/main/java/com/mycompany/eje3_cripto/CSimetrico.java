@@ -90,7 +90,7 @@ public class CSimetrico {
                 cs.execute();
                 JOptionPane.showMessageDialog(null, "Se encripto correctamente la contraseña");
             }catch (Exception e){
-                JOptionPane.showMessageDialog(null, "Error: "+e);
+                JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
             }            
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Seleccione un registro para poder encriptar la contraseña");
