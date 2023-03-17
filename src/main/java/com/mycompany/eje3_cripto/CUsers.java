@@ -17,9 +17,9 @@ import javax.swing.table.DefaultTableModel;
  * @author lnxcity
  */
 public class CUsers {
-    int codigo;
-    String Users;
-    String Password;
+    private int codigo;
+    private String Users;
+    private String Password;
 
     public String getPasswordHash() {
         return PasswordHash;
@@ -68,7 +68,7 @@ public class CUsers {
         
         paramTablaTotalAlumnos.setModel(modelo);
         
-        sql = "SELECT * FROM  users order by id;";
+        sql = "SELECT id, usuario, password, case when password_hash is null then '' else password_hash end as password_hash FROM  users order by id;";
         
         String [] datos = new String[4];
         Statement st;
@@ -114,7 +114,8 @@ public class CUsers {
         
     }
     
-    public void SeleccionarUser(JTable paramTableUser,JTextField paramCodigo, JTextField paramUsers, JTextField paramPassword){
+    public void SeleccionarUser(JTable paramTableUser,JTextField paramCodigo, JTextField paramUsers, JTextField paramPassword,JTextField paramEncryptPassword){        
+        
         try{
             int fila =paramTableUser.getSelectedRow();
             if (fila>=0){
@@ -122,6 +123,7 @@ public class CUsers {
                 paramCodigo.setText(paramTableUser.getValueAt(fila,0).toString());
                 paramUsers.setText(paramTableUser.getValueAt(fila,1).toString());
                 paramPassword.setText(paramTableUser.getValueAt(fila,2).toString());                
+                paramEncryptPassword.setText(paramTableUser.getValueAt(fila,3).toString());
             }
             else{
                 JOptionPane.showMessageDialog(null,"fila no seleccionada");
@@ -129,7 +131,7 @@ public class CUsers {
                 
             
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error: "+e);
+            JOptionPane.showMessageDialog(null,"Error:"+e.getMessage());
         }
     }
 
@@ -172,23 +174,4 @@ public class CUsers {
         }
         
     }
-    
-    public void EncriptarContraseña(JTextField paramCodigo){
-        setCodigo(Integer.parseInt(paramCodigo.getText()));
-        
-        CConexion objetoConexion = new CConexion();
-        
-        String consulta = "DELETE FROM users WHERE id = ?;";
-        
-        try{
-            CallableStatement cs = objetoConexion.establecerConexion().prepareCall(consulta);
-            cs.setInt(1, getCodigo());
-            cs.execute();
-            JOptionPane.showMessageDialog(null, "Se eliminó correctamente.");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error: "+e);
-        }
-        
-    }
-    
 }

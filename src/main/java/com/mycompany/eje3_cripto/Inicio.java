@@ -8,7 +8,7 @@ package com.mycompany.eje3_cripto;
  *
  * @author lnxcity
  */
-public class Inicio {
+public class Inicio  {
 
     public static void main(String[] args) {
         
