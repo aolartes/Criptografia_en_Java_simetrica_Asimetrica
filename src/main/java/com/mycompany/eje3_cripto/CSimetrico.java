@@ -97,7 +97,36 @@ public class CSimetrico {
             
         }
         
-    }  
+    }
+    
+    public  void decryptPassword(JTextField paramCodigo,JTextField paramPassword, JTextField paramPasswordHash ) throws NoSuchAlgorithmException  {
+        setCodigo(Integer.parseInt(paramCodigo.getText()));
+        setPassword(paramPassword.getText());
+        setEncryptPassword(paramPasswordHash.getText());
+        
+
+        boolean isMatch = checkPassword(getPassword(),getEncryptPassword());
+        
+        if (isMatch == true){
+            JOptionPane.showMessageDialog(null, "Contaseña Correcta Puede ingresar: " + isMatch);        
+        }else{
+            JOptionPane.showMessageDialog(null, "La contraseña no coincide por favor validar nuevamente");        
+        }
+        
+        
+        
+    }
+    
+    public static boolean checkPassword(String password, String storedPassword) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashedPassword) {
+            sb.append(String.format("%02x", b));
+        }
+        String encryptedPassword = sb.toString();
+        return encryptedPassword.equals(storedPassword);
+    }
     
     
     
