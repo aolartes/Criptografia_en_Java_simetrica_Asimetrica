@@ -1,6 +1,6 @@
 # Criptografía en Java
 
-![](https://atalayar.com/sites/default/files/styles/foto_/public/noticias/cryptography-scaled-e1593335036543.jpg)
+![](https://i.ibb.co/dGsX86H/image.png)
 
 ### Features
 Este programa permite ver de manera simple, fácil y practica la manera como se puede usar los dos tipos de criptografía mas comunes:
