@@ -60,7 +60,7 @@ Con esto cargar la aplicación en el IDE (NetBeans, Eclipse, IntelliJ IDEA, etc.
 ![](https://i.ibb.co/2PtqGVW/image.png)
 
 
-##### En caso de que la contraseña no coincida con la contraseña hasheada en la base de datos esta aroojara error:
+##### En caso de que la contraseña no coincida con la contraseña hasheada en la base de datos esta arrojara error:
 
 ![](https://i.ibb.co/GnLTBNv/image.png)
 
