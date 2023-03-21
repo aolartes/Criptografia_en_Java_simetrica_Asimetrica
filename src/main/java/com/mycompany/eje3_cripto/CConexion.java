@@ -17,7 +17,7 @@ public class CConexion {
     Connection conectar = null;
     
     String usuario = "aolartes";
-    String contrasenia = "123456aA!";
+    String contrasenia = "Password123";
     String bd = "javadb";
     String ip = "Localhost";
     String puerto = "5432";
